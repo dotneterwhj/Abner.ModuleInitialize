@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddModuleInitializer(this IServiceCollection services)
         {
-            services.AddModuleInitializer(GetAllRefrenceAssemblies(Assembly.GetCallingAssembly()));
+            services.AddModuleInitializer(AssemblyHelper.GetAllRefrenceAssemblies(Assembly.GetCallingAssembly()));
 
             return services;
         }
@@ -21,7 +21,7 @@ namespace Microsoft.Extensions.DependencyInjection
             if (assemblies == null || assemblies.Length == 0)
             {
                 var excuteAssm = new List<Assembly>();
-                excuteAssm.Add(Assembly.GetEntryAssembly());
+                excuteAssm.AddRange(AssemblyHelper.GetAllRefrenceAssemblies(Assembly.GetEntryAssembly()));
                 assemblies = excuteAssm.ToArray();
             }
 
@@ -45,25 +45,6 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-        /// <summary>
-        /// 获取所有引用的程序集
-        /// </summary>
-        /// <param name="assembly"></param>
-        /// <returns></returns>
-        private static Assembly[] GetAllRefrenceAssemblies(Assembly assembly)
-        {
-            var assemblies = new List<Assembly>();
-
-            assemblies.Add(assembly);
-
-            foreach (var assemblyName in assembly.GetReferencedAssemblies())
-            {
-                var refrenceAssembly = Assembly.Load(assemblyName);
-                if (!assemblies.Contains(refrenceAssembly))
-                    assemblies.Add(refrenceAssembly);
-            }
-
-            return assemblies.ToArray();
-        }
+        
     }
 }
