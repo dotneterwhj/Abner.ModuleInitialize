@@ -3,15 +3,23 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>Abner.ModuleInitialize</PackageId>
-		<Version>1.0.1</Version>
+		<Version>1.0.2</Version>
 		<Authors>Abner</Authors>
 		<Company>Abner</Company>
 		<PackageProjectUrl>https://github.com/dotneterwhj/Abner.ModuleInitialize</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/dotneterwhj/Abner.ModuleInitialize</RepositoryUrl>
-		<PackageVersion>1.0.1</PackageVersion>
-		<Description>参照杨中科老师模块化注册的思路实现，只需在启动的项目中注册services.AddModuleInitializer()；然后在其他的项目中实现IModuleInitializer即可完成各个项目独立的注册</Description>
+		<PackageVersion>1.0.2</PackageVersion>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Description>Module Initialize</Description>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+		<None Include="..\..\LICENSE" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />

@@ -13,6 +13,12 @@ In your project create a class which should implemnet interface IModuleInitializ
 In your start up project , add this line
 
 ```c#
+// 加载当前运行目录所有程序集
 services.AddModuleInitializer();
+```
+or
+```c#
+// 只加载引用的程序集
+services.AddRefrenceModuleInitializer();
 ```
 

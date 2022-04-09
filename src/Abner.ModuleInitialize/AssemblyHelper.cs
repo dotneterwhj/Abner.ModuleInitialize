@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -54,6 +55,29 @@ namespace Abner.ModuleInitialize
             }
 
             return companyAttributes.Where(s => s.Company.Contains("Microsoft")).Any();
+        }
+
+        /// <summary>
+        /// 获取当前目录下的所有程序集 dll
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static Assembly[]? GetAllAssemblies(string path, SearchOption searchOption = SearchOption.TopDirectoryOnly)
+        {
+            var assemblies = new List<Assembly>();
+
+            DirectoryInfo directory = new DirectoryInfo(path);
+
+            if (directory.Exists)
+            {
+                var dlls = directory.GetFiles("*.dll", searchOption);
+                foreach (var dll in dlls)
+                {
+                    var assembly = Assembly.LoadFile(dll.FullName);
+                    assemblies.Add(assembly);
+                }
+            }
+            return assemblies.Distinct().ToArray();
         }
     }
 }

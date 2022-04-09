@@ -10,12 +10,17 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddModuleInitializer(this IServiceCollection services)
         {
-            services.AddModuleInitializer(AssemblyHelper.GetAllRefrenceAssemblies(Assembly.GetCallingAssembly()));
-
+            AddRefrenceModuleInitializer(services, AssemblyHelper.GetAllAssemblies(AppDomain.CurrentDomain.BaseDirectory));
             return services;
         }
 
-        private static IServiceCollection AddModuleInitializer(this IServiceCollection services, params Assembly[] assemblies)
+        public static IServiceCollection AddRefrenceModuleInitializer(this IServiceCollection services)
+        {
+            AddRefrenceModuleInitializer(services, AssemblyHelper.GetAllRefrenceAssemblies(Assembly.GetCallingAssembly()));
+            return services;
+        }
+
+        private static IServiceCollection AddRefrenceModuleInitializer(this IServiceCollection services, params Assembly[] assemblies)
         {
             // 如果没有指定的程序集则加载所有引用的程序集
             if (assemblies == null || assemblies.Length == 0)
@@ -45,6 +50,6 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-        
+
     }
 }

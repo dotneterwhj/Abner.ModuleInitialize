@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Abner.ModuleInitialize\Abner.ModuleInitialize.csproj" />
+    <ProjectReference Include="..\Sample.IRepository\Sample.IRepository.csproj" />
+  </ItemGroup>
+
+</Project>
